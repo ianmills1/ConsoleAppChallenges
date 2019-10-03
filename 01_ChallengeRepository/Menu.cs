@@ -6,10 +6,10 @@ using System.Threading.Tasks;
 
 namespace _01_ChallengeRepository
 {
-    public enum IngredientType { Add_Cheese = 1, Add_Bacon, Extra_Meat, Extra_Side }
+    public enum LocalIngredient { Beef = 1, Fish, Vegetables, Fruit, Eggs, Dairy }
     public class Menu
     {
-        public Menu(int mealNumber, string mealName, string description, IngredientType ingredient, decimal price)
+        public Menu(int mealNumber, string mealName, string description, LocalIngredient ingredient, decimal price)
         {
             MealNumber = mealNumber;
             MealName = mealName;
@@ -17,14 +17,16 @@ namespace _01_ChallengeRepository
             Ingredient = ingredient;
             Price = price;
         }
+
         public Menu()
         {
 
         }
+
         public int MealNumber { get; set; }
         public string MealName { get; set; }
         public string Description { get; set; }
-        public IngredientType Ingredient { get; set; }
+        public LocalIngredient Ingredient { get; set; }
         public decimal Price { get; set; }
     }
 }

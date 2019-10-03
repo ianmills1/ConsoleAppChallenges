@@ -8,40 +8,82 @@ namespace _01_UnitTest
     [TestClass]
     public class MenuRepositoryTests
     {
+
         [TestMethod]
         public void CreateMenuItemTest()
         {
-            Menu content = new Menu();
+            Menu meal = new Menu();
 
-            content.MealNumber = 4;
-            int expected = 4;
-            Assert.AreEqual(expected, content.MealNumber);
+            meal.MealNumber = 2;
+            int expected = 2;
+            Assert.AreEqual(expected, meal.MealNumber);
 
-            Menu contentTwo = new Menu(6, "Cheeseburger combo", "Cheeseburger, fries and drink", IngredientType.Add_Bacon, 8.99m);
+            Menu mealTwo = new Menu(2, "Cheeseburger combo", "Cheeseburger with fries and a drink", LocalIngredient.Beef, 10.99m);
 
-            contentTwo.Price = 8.99m;
-            decimal expectedTwoPrice = 8.99m;
-            Assert.AreEqual(expectedTwoPrice, contentTwo.Price);
+            mealTwo.Price = 10.99m;
+            decimal expectedTwoPrice = 10.99m;
+            Assert.AreEqual(expectedTwoPrice, mealTwo.Price);
         }
 
         [TestMethod]
         public void AddToListTest()
         {
             MenuRepository menuRepo = new MenuRepository();
-            List<Menu> contents = menuRepo.GetMenuList();
+            List<Menu> meal = menuRepo.GetMenuList();
 
-            Menu contentThree = new Menu(90, "Fish and chips", "battered fish with fries", IngredientType.Extra_Side, 9.99m);
-            Menu contentFour = new Menu(72, "Soup and salad", "cup of soup and house salad", IngredientType.Extra_Side, 6.99m);
+            Menu mealThree = new Menu(1, "BLT combo", "BLT with chips and a drink", LocalIngredient.Vegetables, 8.99m);
+            Menu mealFour = new Menu(3, "Fruit salad", "Fruit salad and a drink", LocalIngredient.Fruit, 8.49m);
 
-            menuRepo.AddMenuItem(contentThree);
-            menuRepo.AddMenuItem(contentFour);
+            menuRepo.AddToList(mealThree);
+            menuRepo.AddToList(mealFour);
 
-            int actual = contents.Count;
+            int actual = meal.Count;
             int expectedThree = 2;
             Assert.AreEqual(expectedThree, actual);
         }
 
         [TestMethod]
-        public void 
+        public void RemoveFromListByMealNumberTest()
+        {
+            MenuRepository menuRepo = new MenuRepository();
+            List<Menu> meal = menuRepo.GetMenuList();
+
+            Menu mealTwo = new Menu(2, "Cheeseburger combo", "Cheeseburger with fries and a drink", LocalIngredient.Beef, 10.99m);
+            Menu mealThree = new Menu(1, "BLT combo", "BLT with chips and a drink", LocalIngredient.Vegetables, 8.99m);
+            Menu mealFour = new Menu(3, "Fruit salad", "Fruit salad and a drink", LocalIngredient.Fruit, 8.49m);
+
+            menuRepo.AddToList(mealTwo);
+            menuRepo.AddToList(mealThree);
+            menuRepo.AddToList(mealFour);
+
+            menuRepo.RemoveFromList(3);
+
+            int expected = 2;
+            int actual = meal.Count;
+
+            Assert.AreEqual(expected, actual);
+        }
+
+        [TestMethod]
+        public void RemoveFromListByMealName()
+        {
+            MenuRepository menuRepo = new MenuRepository();
+            List<Menu> meal = menuRepo.GetMenuList();
+
+            Menu mealTwo = new Menu(2, "Cheeseburger combo", "Cheeseburger with fries and a drink", LocalIngredient.Beef, 10.99m);
+            Menu mealThree = new Menu(1, "BLT combo", "BLT with chips and a drink", LocalIngredient.Vegetables, 8.99m);
+            Menu mealFour = new Menu(3, "Fruit salad", "Fruit salad and a drink", LocalIngredient.Fruit, 8.49m);
+
+            menuRepo.AddToList(mealTwo);
+            menuRepo.AddToList(mealThree);
+            menuRepo.AddToList(mealFour);
+
+            menuRepo.RemoveFromList("Cheeseburger combo");
+
+            int expected = 2;
+            int actual = meal.Count;
+
+            Assert.AreEqual(expected, actual);
+        }
     }
 }

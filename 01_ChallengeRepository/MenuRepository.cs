@@ -10,9 +10,9 @@ namespace _01_ChallengeRepository
     {
         List<Menu> _menuList = new List<Menu>();
 
-        public void AddMenuItem(Menu content)
+        public void AddToList(Menu meal)
         {
-            _menuList.Add(content);
+            _menuList.Add(meal);
         }
 
         public List<Menu> GetMenuList()
@@ -20,37 +20,39 @@ namespace _01_ChallengeRepository
             return _menuList;
         }
 
-        public void RemoveMenuItem(int mealNumber)
+        public void RemoveFromList(int mealNumber)
         {
-            foreach (Menu content in _menuList)
+            foreach (Menu meal in _menuList)
             {
-                if (content.MealNumber == mealNumber)
+                if (meal.MealNumber == mealNumber)
                 {
-                    _menuList.Remove(content);
+                    _menuList.Remove(meal);
+                    break;
                 }
             }
         }
 
-        public void RemoveMenuItem(string mealName)
+        public void RemoveFromList(string mealName)
         {
-            foreach (Menu content in _menuList)
+            foreach (Menu meal in _menuList)
             {
-                if (content.MealName == mealName)
+                if (meal.MealName == mealName)
                 {
-                    _menuList.Remove(content);
+                    _menuList.Remove(meal);
+                    break;
                 }
             }
         }
 
         public void SeedList()
         {
-            Menu content = new Menu(5, "BLT combo", "BLT with chips and drink", IngredientType.Extra_Meat, 8.99m);
-            Menu contentTwo = new Menu(8, "Half sandwich and soup", "Half of one of our sandwiches and a cup of your favorite soup", IngredientType.Add_Bacon, 6.99m);
-            Menu contentThree = new Menu(10, "Club sandwich combo", "Club sandwich with chips and drink", IngredientType.Extra_Side, 8.49m);
+            Menu meal = new Menu(1, "BLT combo", "BLT with chips and a drink", LocalIngredient.Vegetables, 8.99m);
+            Menu mealTwo = new Menu(2, "Cheeseburger combo", "Cheeseburger with fries and a drink", LocalIngredient.Beef, 10.99m);
+            Menu mealThree = new Menu(3, "Fruit salad combo", "Fruit salad with a drink", LocalIngredient.Fruit, 8.49m);
 
-            AddMenuItem(content);
-            AddMenuItem(contentTwo);
-            AddMenuItem(contentThree);
+            AddToList(meal);
+            AddToList(mealTwo);
+            AddToList(mealThree);
         }
     }
 }
